@@ -18,23 +18,26 @@ public class Automovil {
     private int velocidadMax;
     private Color color;
     private int velocidadActual;
+    private boolean esAutomatico;
+    private int multa;
 
     /**
      * Método constructor con todos los parámetros
-     * @param marca
-     * @param anhoFabricacion
-     * @param motor
-     * @param tipoCombustible
-     * @param tipoAutomovil
-     * @param cantidadPuertas
-     * @param asientos
-     * @param velocidadMax
-     * @param color
+     * @param marca marca del vehículo
+     * @param anhoFabricacion año de fabricación
+     * @param motor Tipo de motor
+     * @param tipoCombustible Tipo de combustible
+     * @param tipoAutomovil Tipo de vehículo
+     * @param cantidadPuertas Número de puertas
+     * @param asientos Número de asientos
+     * @param velocidadMax Velocidad máxima permitida
+     * @param color Color del auto
+     * @param esAutomatico Definimos si el vehículo es automatico
      */
     public Automovil(String marca, int anhoFabricacion, String motor,
                      TipoCombustible tipoCombustible, TipoAutomovil tipoAutomovil,
                      int cantidadPuertas, int asientos, int velocidadMax,
-                     Color color) {
+                     Color color, boolean esAutomatico) {
         this.marca = marca;
         this.anhoFabricacion = anhoFabricacion;
         this.motor = motor;
@@ -44,7 +47,7 @@ public class Automovil {
         this.asientos = asientos;
         this.velocidadMax = velocidadMax;
         this.color = color;
-        this.velocidadActual = velocidadActual;
+        this.esAutomatico = esAutomatico;
     }
 
     /**
@@ -122,12 +125,28 @@ public class Automovil {
         this.color = color;
     }
 
+    public void setEsAutomatico(boolean esAutomatico) {
+        this.esAutomatico = esAutomatico;
+    }
+
+    public boolean getEsAutomatico() {
+        return esAutomatico;
+    }
+
     public int getVelocidadActual() {
         return velocidadActual;
     }
 
     public void setVelocidadActual(int velocidadActual) {
         this.velocidadActual = velocidadActual;
+    }
+
+    public void setMulta(int multa) {
+        this.multa = multa;
+    }
+
+    public int getMulta() {
+        return multa;
     }
 
     /**
@@ -138,6 +157,8 @@ public class Automovil {
         if ((velocidadActual + incrementoVelocidad) > velocidadMax) {
             System.out.println("No se puede incrementar la velocidad");
             System.out.println("La velocidad máxima permitida es de 100Km/h");
+            System.out.println("Se ha generado una multa por exceso de velocidad de $12");
+            multa = multa + 12;
         } else {
             velocidadActual = velocidadActual + incrementoVelocidad;
         }
@@ -183,6 +204,16 @@ public class Automovil {
         System.out.println("Cantidad de puertas: " + cantidadPuertas);
         System.out.println("Número de asientos: " + asientos);
         System.out.println("Color: " + color);
+        System.out.println("Es automático?: " + esAutomatico);
+    }
+
+    void consultaMultas() {
+        if(multa > 0) {
+            System.out.println("El vehículo de la marca " + marca + ", " +
+                    "a la fecha posee multas por un monto de: $" + multa);
+        } else {
+            System.out.println("El vehículo no presenta multas a la fecha");
+        }
     }
 
 }
